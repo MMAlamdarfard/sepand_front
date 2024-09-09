@@ -34,9 +34,16 @@ const NavBar = () => {
         </div>
         </div>
       </DropdownTrigger>
-      <DropdownMenu variant="faded" aria-label="Dropdown menu with icons" items={items}>
+      <DropdownMenu  variant="faded" aria-label="Dropdown menu with icons" items={items}>
         {(item) => (
           <DropdownItem
+           onPress={
+            ()=>{
+              sessionStorage.removeItem("access")
+              sessionStorage.removeItem("refresh")
+              window.location.href = '/login';
+            }
+           }
             key={item.key}
             color={item.key === "logout" ? "danger" : "primary"}
             className={item.key === "logout" ? "text-danger" : ""}

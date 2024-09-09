@@ -6,7 +6,7 @@ import { FaAngleDown } from 'react-icons/fa';
 import { AiOutlinePushpin } from 'react-icons/ai';
 import side_data from '@/input/sidebar_input';
 import Image from 'next/image';
-import Univercity from '@/public/university.png'
+import Logo from '@/public/logo.png'
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import MyIcon from './icon';
@@ -55,8 +55,8 @@ const Sidebar= () => {
     <div className="flex flex-col bg-white h-screen w-64 rounded-bl-3xl shadow-sidebarr">
       <div className=' flex flex-row items-center w-full py-3  px-2 shadow-top-sidebar h-20'>
        <Image
-          src={Univercity}
-          alt='uni'
+          src={Logo}
+          alt='logo'
           height={60}
         />
         <div className={`flex-1 text-sm justify-center ms-2`}>

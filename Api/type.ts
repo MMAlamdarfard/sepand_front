@@ -4,8 +4,11 @@
     results:T[],
     next:string|null
 } 
-export type responce<T>={
+export type responce<T,K>={
     data?:T|null,
-    err:any,
+    err?:K|null,
     isLoading:boolean,
+}
+export interface Message {
+    message: string;
 }
