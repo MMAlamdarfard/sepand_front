@@ -76,61 +76,7 @@ http.interceptors.response.use(
         }
       
     }
-
-    // For other errors, reject the promise with the error
     return Promise.reject(error);
-  //   console.log(error)
-  //   if (error.response && error.response.status === 401) {
-      
-      
-  //     // if (err.requestOptions.path.contains("refreshToken")) {
-  //     //   // If the refresh token request itself failed, logout the user
-  //     //   loginApi.logout();
-  //     //   return handler.reject(err);
-  //     // } else {
-  //     //   try {
-  //     //     // Attempt to refresh the token
-  //     //     var requestOption = err.requestOptions;
-  //     //     final tokenRefreshResult = await loginApi.refreshToken();
-  //     //     tokenRefreshResult.fold(
-  //     //       (newToken) async {
-  //     //         requestOption.headers["authorization"] = loginApi.getAccessToken();
-  //     //         try {
-  //     //           final response = await Dio().fetch(requestOption);
-  //     //           if (response.statusCode == 200 || response.statusCode == 201) {
-  //     //             handler.resolve(response);
-  //     //           } else {
-  //     //              handler.reject(err);
-  //     //           }
-  //     //         } catch (e) {
-  //     //           super.onError(err, handler);
-  //     //         }
-             
-  //     //       },
-  //     //       (error) {
-  //     //         // Handle token refresh failure
-  //     //         loginApi.logout();
-  //     //         return handler.reject(err);
-  //     //       },
-  //     //     );
-  //     //   } catch (e) {
-  //     //     // Handle errors during the token refresh process
-  //     //     loginApi.logout();
-  //     //     return handler.reject(e as DioException);
-  //     //   }
-  //    // }
-   
-  //    if (typeof window !== 'undefined'){
-  //       sessionStorage.removeItem("access");
-  //       sessionStorage.removeItem("refresh");
-  //       window.location.href = '/login';
-  //    }
-  //    else{
-  //     redirect('/login');
-  //    }
-     
-  //   }
-  //   return Promise.reject(error);
   }
 );
 

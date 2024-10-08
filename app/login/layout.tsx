@@ -8,7 +8,7 @@ import Providers from "@/app/(dashboard)/provider";
 import { Bounce, ToastContainer } from "react-toastify";
 
 const vazir = localFont({
-  src: '../../public/font/Vazir.woff', 
+  src: '../../public/font/Vazir-FD-WOL.woff', 
 
 })
 // "start": "next start",

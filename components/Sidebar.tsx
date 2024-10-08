@@ -10,7 +10,7 @@ import Logo from '@/public/logo.png'
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import MyIcon from './icon';
-
+import { IoClose } from "react-icons/io5";
 // type Menus = [{
 
 //   title: string;
@@ -26,7 +26,7 @@ import MyIcon from './icon';
 //   ];
 // }]
 
-const Sidebar= () => {
+const Sidebar= ({open,onOpen}:{open:boolean,onOpen:(isOpen:boolean)=>void}) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const refs = useRef<(HTMLDivElement | null)[]>([]);
   const pathname = usePathname();
@@ -36,6 +36,7 @@ const Sidebar= () => {
 
   const handleClick = (index: number) => {
     setOpenIndex((prevIndex) => (prevIndex === index ? null : index));
+    
   };
 
   useEffect(() => {
@@ -49,9 +50,9 @@ const Sidebar= () => {
       }
     });
   }, [openIndex,side_data]);
-
+  console.log(open)
   return (
-    <div className='fixed'>
+    <div className={`fixed z-50 ${open? 'lg:mr-0 mr-0':'-mr-64 lg:mr-0'} transition-all duration-400`}>
     <div className="flex flex-col bg-white h-screen w-64 rounded-bl-3xl shadow-sidebarr">
       <div className=' flex flex-row items-center w-full py-3  px-2 shadow-top-sidebar h-20'>
        <Image
@@ -62,6 +63,16 @@ const Sidebar= () => {
         <div className={`flex-1 text-sm justify-center ms-2`}>
           <p className=' text-s  font-bold mb-1 '>سامانه  سپند </p>
          
+        </div>
+
+        <div className='lg:hidden'>
+          <button onClick={
+            ()=>{
+              onOpen(false)
+            }
+          } className={`w-10 h-10`}>
+            <IoClose className=' text-lg' />
+          </button>
         </div>
         
          
@@ -77,7 +88,10 @@ const Sidebar= () => {
             <div key={(side.menu.length*i)+j} className="overflow-hidden relative my-1">
            <div className={`flex flex-row justify-center hover:bg-sepandprimary-50   px-8  transition-all duration-300 rounded-md ${(openIndex==(side.menu.length*i)+j)?'bg-sepandprimary-100 ':''}`}>
        
-         {!men.sub? <Link onClick={() => handleClick((side.menu.length*i)+j)} className='group relative  flex flex-row items-center flex-1 list-none py-3 select-none text-gray-500' href={men.url??"/"}>
+         {!men.sub? <Link onClick={() => {
+          handleClick((side.menu.length*i)+j)
+          onOpen(false)
+          }} className='group relative  flex flex-row items-center flex-1 list-none py-3 select-none text-gray-500' href={men.url??"/"}>
            
           
            {men.icon? <MyIcon type={men.icon} isSelected={(openIndex==(side.menu.length*i)+j)}/>:<></>}
@@ -90,7 +104,10 @@ const Sidebar= () => {
           
             
          
-          </Link>:<li onClick={() => handleClick((side.menu.length*i)+j)} className='group relative flex flex-row items-center flex-1 list-none py-3 select-none text-gray-500'>
+          </Link>:<li onClick={() => {
+            handleClick((side.menu.length*i)+j)
+            
+            }} className='group relative flex flex-row items-center flex-1 list-none py-3 select-none text-gray-500'>
            
           
           {men.icon? <MyIcon type={men.icon} isSelected={(openIndex==(side.menu.length*i)+j)}/>:<></>}
@@ -117,12 +134,16 @@ const Sidebar= () => {
                <div className='pb-2'></div>
 
               {men.sub.map((su, k) => (
-                <div className="relative group">
+                <div onClick={
+                  ()=>{
+                     onOpen(false)
+                  }
+                } className="relative group">
                   <AiOutlinePushpin className={`text-sepandprimary-900  absolute left-5 opacity-0 bottom-1/2 translate-y-1/2 ${su.url==pathname?'opacity-100':''}`}/> 
           
                   <Link href={su.url??'/'}>
                   
-                  <div key={k} className={`${su.url==pathname?'text-sepandprimary-900':''} group-hover:text-sepandprimary-900  ms-9 py-2 text-sm     transition-all duration-400 rounded-md px-4 text-gray-500  before:content-[''] before:absolute before:top-1/2 before:w-[6px] before:-translate-x-1/2   before:-translate-y-1/2 before:h-[6px] before:m-auto  before:z-20 before:right-7 before:rounded-full after:content-[''] after:absolute after:top-1/2 after:w-[8px] after:-translate-[0.5px]  after:h-[1px] after:m-auto after:bg-gray-400 before:hover:bg-sepandprimary-900  after:z-10 after:right-8 after:rounded-full`}>{su.submenu}</div>
+                  <div  key={k} className={`${su.url==pathname?'text-sepandprimary-900':''} group-hover:text-sepandprimary-900  ms-9 py-2 text-sm     transition-all duration-400 rounded-md px-4 text-gray-500  before:content-[''] before:absolute before:top-1/2 before:w-[6px] before:-translate-x-1/2   before:-translate-y-1/2 before:h-[6px] before:m-auto  before:z-20 before:right-7 before:rounded-full after:content-[''] after:absolute after:top-1/2 after:w-[8px] after:-translate-[0.5px]  after:h-[1px] after:m-auto after:bg-gray-400 before:hover:bg-sepandprimary-900  after:z-10 after:right-8 after:rounded-full`}>{su.submenu}</div>
                  </Link>
                 
                 </div>

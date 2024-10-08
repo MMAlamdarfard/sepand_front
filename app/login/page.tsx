@@ -9,6 +9,7 @@ import { Button, Input } from '@nextui-org/react';
 import usePostLogin from '@/Api/login/hooks/post_login';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
+import CustomInput from '@/components/custom_input';
 export default function Login() {
   const [logged,setIsLogged] =useState<boolean>(false);
   const [errorPassword,setErrorPassword] =useState<string|null>(null); 
@@ -61,54 +62,44 @@ export default function Login() {
              <div className='w-[350px]'>
               <h1 className=' text-2xl font-bold mb-1'> سامانه سپند</h1>
               <div className=' w-full h-[0.5px] bg-black mb-10'/> 
-             <Input 
-               dir='ltr'
-               type="email"
-               color='primary'
-               variant="bordered" 
-               errorMessage={errorPhone}
-               isInvalid={errorPhone!=null}
-               label="شماره همراه" 
-               className=' mb-6'
-               onFocus={()=>{
-                setErrorPhone(null)
-               }}
-               onChange={(v)=>{
-                setErrorPhone(null)
-                setPhone(v.target.value)
-             }}
-               classNames={
-                {label: "text-black/50"}
-               } />
-             <Input  
-               dir='ltr'
-               onFocus={()=>{
-                 setErrorPassword(null)
-               }}
-               errorMessage={errorPassword}
-               isInvalid={errorPassword!=null}
-             
-               onChange={(v)=>{
+             <CustomInput
+               error={errorPhone}
+                label="شماره همراه"
+                placeholder='09#########'
+                className=' mb-6'
+                onChange={(d)=>{
+                  setErrorPhone(null)
+                  setPhone(d)
+                }}
+                onFocus={()=>{
+                  setErrorPhone(null)
                   setErrorPassword(null)
-                  setPassword(v.target.value)
-               }}
-               color='primary'
-               variant="bordered"
-               label="رمزعبور"
-               endContent={
-                <button className="focus:outline-none mr-3 " type="button" onClick={toggleVisibility} aria-label="toggle password visibility">
-                  {!isVisible ? (
-                    <FaEye  className="text-2xl text-default-400 pointer-events-none" />
-                  ) : (
-                    <FaEyeSlash className="text-2xl text-default-400 pointer-events-none" />
-                  )}
-                </button>
-              }
-              type={isVisible ? "text" : "password"}
-              
-               classNames={
-                {label: "text-black/50"}
-               } />
+                }}
+             />
+              <CustomInput
+               error={errorPassword}
+                label="رمز عبور"
+                placeholder='لطفا رمز عبور را وارد کنید'
+                onChange={(d)=>{
+                  setErrorPassword(null)
+                  setPassword(d)
+                  
+                }}
+                onFocus={()=>{
+                  setErrorPhone(null)
+                  setErrorPassword(null)
+                }}
+                type={isVisible ? "text" : "password"}
+                endContent={
+                  <button className="focus:outline-none mr-3 " type="button" onClick={toggleVisibility} aria-label="toggle password visibility">
+                    {!isVisible ? (
+                      <FaEye  className="text-2xl text-default-400 pointer-events-none" />
+                    ) : (
+                      <FaEyeSlash className="text-2xl text-default-400 pointer-events-none" />
+                    )}
+                  </button>
+                }
+             />
               <Button onPress={
                 
                  
